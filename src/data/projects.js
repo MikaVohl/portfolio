@@ -1,5 +1,13 @@
 const projects = [
   {
+    title: "Terraria RL Environment",
+    stack: "C / Python / Pytorch",
+    href: "https://github.com/MikaVohl/terraria-env",
+    img: "/images/terrariaRL.png",
+    description:
+      "Training Reinforcement Learning agents in a small Terraria-style environment written in C.",
+  },
+  {
     title: "Neural Net Game of Life",
     stack: "Python / Pytorch / Typescript",
     href: "https://life.mikavohl.ca",
@@ -86,14 +94,6 @@ const projects = [
     img: "/images/NetflixSubscription.png",
     description:
       "Backend service that integrates Stripe directly with your own SQL database.",
-  },
-  {
-    title: "Interactive Quiz Builder",
-    stack: "Java / Swing",
-    href: "https://github.com/MikaVohl/BusyQuizzy",
-    img: "/images/busyQuiz.png",
-    description:
-      "Java desktop tool to build and take interactive quizzes.",
-  },
+  }
 ];
 export default projects;
