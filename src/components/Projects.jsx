@@ -15,17 +15,17 @@ export default function Projects() {
               index >= 5 ? 'hidden sm:block' : ''
             }`}
           >
-            <div className="flex h-full flex-col rounded-lg border border-gray-200 bg-white px-5 py-4 text-left shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:border-gray-300 group-hover:shadow-md">
+            <div className="project-card flex h-full flex-col rounded-lg border px-5 py-4 text-left shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-md">
               <h3 className="text-2xl font-semibold leading-snug">{p.title}</h3>
-              <h4 className="text-lg font-medium text-gray-500 leading-tight">{p.stack}</h4>
-              <p className="mt-2 mb-3 text-base leading-relaxed text-gray-600">{p.description}</p>
-              <div className="hidden h-40 w-full overflow-hidden rounded-md sm:block">
+              <h4 className="text-muted text-lg font-medium leading-tight">{p.stack}</h4>
+              <p className="text-secondary mt-2 mb-3 text-base leading-relaxed">{p.description}</p>
+              <div className="project-image hidden h-40 w-full overflow-hidden rounded-md sm:block">
                 <img src={p.img} alt={p.title} className="h-full w-full object-contain" />
               </div>
               <div className="mt-auto pt-1">
-                <p className="h-6 min-h-[1.5rem] font-medium text-gray-600">
+                <p className="text-secondary h-6 min-h-[1.5rem] font-medium">
                   {p.href.includes("mikavohl.ca") ? "Try it at " : "View it on "}
-                  <span className="text-blue-500 hover:underline">
+                  <span className="project-link hover:underline">
                     {p.href.includes("mikavohl.ca") ? p.href.replace(/^https?:\/\//, "") : "Github"}
                   </span>
                 </p>

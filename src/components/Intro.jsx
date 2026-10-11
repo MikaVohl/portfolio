@@ -6,11 +6,6 @@ const COUNT = ROWS * COLS;
 const CELL = 30;
 const RADIUS = 80; // brushstroke radius in px
 
-// gray-400 (156,163,175) → gray-700 (55,65,81)
-function lerpColor(t) {
-  return `rgb(${Math.round(156 - t * 101)},${Math.round(163 - t * 98)},${Math.round(175 - t * 94)})`;
-}
-
 function CrossGrid({ sectionRef }) {
   const crossRefs = useRef([]);
   const rafRef = useRef(null);
@@ -45,10 +40,10 @@ function CrossGrid({ sectionRef }) {
           el.style.transition = 'none';
           if (t > 0.01) {
             el.style.transform = `rotate(${t * 45}deg) scale(${1 + t * 0.18})`;
-            el.style.color = lerpColor(t);
+            el.style.setProperty('--cross-intensity', `${t * 100}%`);
           } else {
             el.style.transform = '';
-            el.style.color = '';
+            el.style.removeProperty('--cross-intensity');
           }
         }
       });
@@ -63,7 +58,7 @@ function CrossGrid({ sectionRef }) {
         // restore CSS transition — spring eases everything back to neutral
         el.style.transition = '';
         el.style.transform = '';
-        el.style.color = '';
+        el.style.removeProperty('--cross-intensity');
       }
     };
 
@@ -108,7 +103,7 @@ export default function Intro() {
             Mika Vohl
           </h2>
           <h3
-            className="mt-5 text-lg text-gray-500 md:text-2xl"
+            className="text-muted mt-5 text-lg md:text-2xl"
             style={{ animation: 'fade-up 0.5s ease-out 0.35s both' }}
           >
             Computer Science and Physics @ McGill
@@ -127,7 +122,7 @@ export default function Intro() {
             width="352"
             height="352"
             alt="Mika Vohl portrait"
-            className="w-36 md:w-48 flex-shrink-0 rounded-[10%]"
+            className="w-48 md:w-60 flex-shrink-0 rounded-[10%]"
             loading="lazy"
             decoding="async"
           />

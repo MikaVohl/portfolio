@@ -5,7 +5,7 @@ export default function About() {
       className="scroll-mt-[calc(9vh+35px)] py-12 text-left md:py-16"
     >
       <div className="flex w-full flex-col gap-6 md:flex-row md:items-start md:justify-between md:gap-8">
-        <div className="text-left text-gray-700 text-xl md:flex-1">
+        <div className="text-body text-left text-xl md:flex-1">
           <p className="mb-6">
             I love building products, solving challenging problems, and learning new things. My interest and experience lies mostly in the domains of Machine Learning, Computer Science, and Physics.
           </p>

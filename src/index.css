@@ -2,6 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    color-scheme: light;
+    --page: #ffffff;
+    --surface: #ffffff;
+    --nav-surface: rgb(255 255 255 / 70%);
+    --text: #000000;
+    --text-muted: #6b7280;
+    --text-secondary: #4b5563;
+    --text-body: #374151;
+    --border: #e5e7eb;
+    --border-hover: #d1d5db;
+    --control-border: rgb(0 0 0 / 30%);
+    --control-hover: #f3f4f6;
+    --link: #3b82f6;
+    --cross: #9ca3af;
+    --cross-active: #374151;
+  }
+
+  :root[data-theme='dark'] {
+    color-scheme: dark;
+    --page: #131619;
+    --surface: #1b1f24;
+    --nav-surface: rgb(19 22 25 / 80%);
+    --text: #eceef1;
+    --text-muted: #a1a9b4;
+    --text-secondary: #b5bdc8;
+    --text-body: #c7cdd6;
+    --border: #30363e;
+    --border-hover: #4a5562;
+    --control-border: #545c67;
+    --control-hover: #252b32;
+    --link: #7db3ff;
+    --cross: #48515c;
+    --cross-active: #a1a9b4;
+  }
+
+  body {
+    background-color: var(--page);
+    color: var(--text);
+  }
+
+  ::selection {
+    background: var(--link);
+    color: var(--page);
+  }
+
+  :where(a, button):focus-visible {
+    outline: 2px solid var(--link);
+    outline-offset: 4px;
+  }
+}
+
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -22,6 +75,55 @@
 }
 
 @layer components {
+  .text-muted { color: var(--text-muted); }
+  .text-secondary { color: var(--text-secondary); }
+  .text-body { color: var(--text-body); }
+  .project-link { color: var(--link); }
+
+  .site-nav {
+    background-color: var(--nav-surface);
+  }
+
+  .project-card {
+    background-color: var(--surface);
+    border-color: var(--border);
+  }
+
+  .group:hover .project-card {
+    border-color: var(--border-hover);
+  }
+
+  /* Keep screenshots and transparent diagrams readable in the dark theme. */
+  [data-theme='dark'] .project-image {
+    background-color: #e5e7eb;
+  }
+
+  .resume-link {
+    border-color: var(--control-border);
+    color: var(--text);
+  }
+
+  .resume-link:hover {
+    border-color: var(--text);
+    background-color: var(--text);
+    color: var(--page);
+  }
+
+  .theme-toggle {
+    color: var(--text-muted);
+    transition: color 150ms ease, background-color 150ms ease;
+  }
+
+  .theme-toggle:hover {
+    color: var(--text);
+    background-color: var(--control-hover);
+  }
+
+  @media (max-width: 374px) {
+    .site-nav > div { gap: 0.5rem; }
+    .site-nav .social-links { gap: 0.625rem; font-size: 1.25rem; }
+  }
+
   .cross-grid {
     position: absolute;
     top: 0;
@@ -40,7 +142,8 @@
     }
   }
   .cross-sym {
-    @apply text-gray-400 select-none cursor-default;
+    @apply select-none cursor-default;
+    color: color-mix(in srgb, var(--cross), var(--cross-active) var(--cross-intensity, 0%));
     pointer-events: auto;
     font-size: 20px;
     font-weight: 300;
@@ -53,17 +156,22 @@
   }
 
   .nav-link {
-    @apply uppercase tracking-[0.21em] text-gray-500 px-[2vw] py-[1vh] relative inline-block;
+    @apply uppercase tracking-[0.21em] px-[2vw] py-[1vh] relative inline-block;
+    color: var(--text-muted);
   }
   .nav-link:hover {
-    @apply text-black;
+    color: var(--text);
+  }
+  @media (min-width: 640px) and (max-width: 1023px) {
+    .nav-link { padding-left: 0.5rem; padding-right: 0.5rem; }
   }
 
   /* the little underline */
   .nav-link::after {
     content: "";
     /* block so width works, and absolute relative to the link */
-    @apply block absolute bottom-[3px] left-1/2 w-0 h-[2px] bg-black
+    background-color: var(--text);
+    @apply block absolute bottom-[3px] left-1/2 w-0 h-[2px]
            transition-all duration-300 ease-in-out;
   }
   /* on hover grow it full-width and reset left */
