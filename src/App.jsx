@@ -13,7 +13,7 @@ export default function App() {
         <Projects/>
         <About/>
       </main>
-      <div className="h-[200px]" />
+      <div className="h-[150px]" />
     </div>
   )
 }

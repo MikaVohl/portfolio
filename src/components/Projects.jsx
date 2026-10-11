@@ -20,7 +20,10 @@ export default function Projects() {
               <h4 className="text-muted text-lg font-medium leading-tight">{p.stack}</h4>
               <p className="text-secondary mt-2 mb-3 text-base leading-relaxed">{p.description}</p>
               <div className="project-image h-40 w-full overflow-hidden rounded-md">
-                <img src={p.img} alt={p.title} className="h-full w-full object-contain" />
+                <picture>
+                  <source media="(max-width: 639.98px)" type="image/webp" srcSet={p.mobileImg} />
+                  <img src={p.img} alt={p.title} className="h-full w-full object-contain" />
+                </picture>
               </div>
               <div className="mt-auto pt-1">
                 <p className="text-secondary h-6 min-h-[1.5rem] font-medium">
