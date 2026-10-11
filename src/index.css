@@ -93,9 +93,8 @@
     border-color: var(--border-hover);
   }
 
-  /* Keep screenshots and transparent diagrams readable in the dark theme. */
   [data-theme='dark'] .project-image {
-    background-color: #e5e7eb;
+    background-color: #252b32;
   }
 
   .resume-link {

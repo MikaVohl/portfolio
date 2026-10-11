@@ -19,7 +19,7 @@ export default function Projects() {
               <h3 className="text-2xl font-semibold leading-snug">{p.title}</h3>
               <h4 className="text-muted text-lg font-medium leading-tight">{p.stack}</h4>
               <p className="text-secondary mt-2 mb-3 text-base leading-relaxed">{p.description}</p>
-              <div className="project-image hidden h-40 w-full overflow-hidden rounded-md sm:block">
+              <div className="project-image h-40 w-full overflow-hidden rounded-md">
                 <img src={p.img} alt={p.title} className="h-full w-full object-contain" />
               </div>
               <div className="mt-auto pt-1">
