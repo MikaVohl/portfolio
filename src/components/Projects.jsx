@@ -1,4 +1,5 @@
 import projects from "../data/projects";
+import ProjectPreview from "./previews/ProjectPreview";
 
 export default function Projects() {
   return (
@@ -6,26 +7,25 @@ export default function Projects() {
 
       <div className="flex flex-wrap justify-start gap-6">
         {projects.map((p, index) => (
-          <a
+          <div
             key={p.title}
-            href={p.href}
-            target="_blank"
-            rel="noreferrer"
             className={`group w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] ${
               index >= 5 ? 'hidden sm:block' : ''
             }`}
           >
-            <div className="project-card flex h-full flex-col rounded-lg border px-5 py-4 text-left shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-md">
-              <h3 className="text-2xl font-semibold leading-snug">{p.title}</h3>
+            <div className="project-card relative flex h-full flex-col rounded-lg border px-5 py-4 text-left shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-md">
+              <h3 className="text-2xl font-semibold leading-snug"><a className="project-card-link" href={p.href} target="_blank" rel="noreferrer">{p.title}</a></h3>
               <h4 className="text-muted text-lg font-medium leading-tight">{p.stack}</h4>
               <p className="text-secondary mt-2 mb-3 text-base leading-relaxed">{p.description}</p>
-              <div className="project-image h-40 w-full overflow-hidden rounded-md">
+              <div className="project-image mt-auto h-40 w-full overflow-hidden rounded-md">
+                {p.preview ? <ProjectPreview kind={p.preview} title={p.title} fallback={p.img} /> : (
                 <picture>
                   <source media="(max-width: 639.98px)" type="image/webp" srcSet={p.mobileImg} />
                   <img src={p.img} alt={p.title} className="h-full w-full object-contain" />
                 </picture>
+                )}
               </div>
-              <div className="mt-auto pt-1">
+              <div className="pt-1">
                 <p className="text-secondary h-6 min-h-[1.5rem] font-medium">
                   {p.href.includes("mikavohl.ca") ? "Try it at " : "View it on "}
                   <span className="project-link hover:underline">
@@ -34,7 +34,7 @@ export default function Projects() {
                 </p>
               </div>
             </div>
-          </a>
+          </div>
         ))}
       </div>
     </section>

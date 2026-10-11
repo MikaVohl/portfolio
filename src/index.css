@@ -19,6 +19,10 @@
     --link: #3b82f6;
     --cross: #9ca3af;
     --cross-active: #1f2937;
+    --glitch-digit: #bcc2c9;
+    --glitch-hot: #6089ab;
+    --glitch-ink: #202428;
+    --glitch-lock: #263e69;
   }
 
   :root[data-theme='dark'] {
@@ -37,6 +41,10 @@
     --link: #7db3ff;
     --cross: #48515c;
     --cross-active: #c7cdd6;
+    --glitch-digit: #48515c;
+    --glitch-hot: #91bada;
+    --glitch-ink: #eceef1;
+    --glitch-lock: #c7d9ff;
   }
 
   body {
@@ -123,21 +131,31 @@
     .site-nav .social-links { gap: 0.625rem; font-size: 1.25rem; }
   }
 
-  .cross-grid {
+  .cross-grid,
+  .glitch-grid {
     position: absolute;
     top: 0;
     right: 0;
     display: none;
-    grid-template-columns: repeat(50, 30px);
-    grid-template-rows: repeat(16, 30px);
     pointer-events: none;
     z-index: 0;
     -webkit-mask-image: radial-gradient(ellipse 1300px 450px at 100% 0%, black 10%, transparent 70%);
     mask-image: radial-gradient(ellipse 1300px 450px at 100% 0%, black 10%, transparent 70%);
   }
+  .cross-grid {
+    grid-template-columns: repeat(50, 30px);
+    grid-template-rows: repeat(16, 30px);
+  }
+  .glitch-grid {
+    width: 1500px;
+    height: 480px;
+  }
   @media (min-width: 768px) {
     .cross-grid {
       display: grid;
+    }
+    .glitch-grid {
+      display: block;
     }
   }
   .cross-sym {
@@ -152,6 +170,32 @@
     justify-content: center;
     /* used only for the mouse-leave spring-back */
     transition: transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.4s ease;
+  }
+
+  .hero-effects {
+    position: absolute;
+    right: 0;
+    bottom: 0.5rem;
+    z-index: 10;
+    display: none;
+    gap: 0.75rem;
+    font: 10px/1 ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  @media (min-width: 768px) {
+    .hero-effects { display: flex; }
+  }
+  .hero-effects button {
+    padding: 0.25rem 0;
+    color: var(--text-muted);
+    opacity: 0.7;
+    transition: color 150ms ease, opacity 150ms ease;
+  }
+  .hero-effects button:hover { opacity: 1; }
+  .hero-effects button[aria-pressed='true'] {
+    color: var(--text);
+    opacity: 1;
   }
 
   .nav-link {

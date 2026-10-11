@@ -1,0 +1,14 @@
+.project-card-link::after { content: ''; position: absolute; inset: 0; border-radius: 8px; }
+.project-card:focus-within { border-color: var(--link); }
+.project-preview { position: relative; z-index: 1; width: 100%; height: 100%; overflow: hidden; isolation: isolate; background: #f6f8fc; }
+.project-preview canvas { display: block; width: 100%; height: 100%; }
+.preview-life canvas { cursor: crosshair; touch-action: none; user-select: none; }
+.preview-motion { position: absolute; top: 5px; right: 5px; display: grid; place-items: center; width: 24px; height: 24px; border: 1px solid rgb(148 163 184 / 22%); border-radius: 5px; background: rgb(255 255 255 / 88%); color: #64748b; cursor: pointer; transition: background 150ms; }
+.preview-motion:hover { background: #fff; color: #2563eb; }
+.preview-terraria .preview-motion { background: rgb(18 29 33 / 72%); color: #fff; }
+[data-theme='dark'] .project-preview { background: #171e29; }
+[data-theme='dark'] .preview-motion { background: rgb(26 35 49 / 90%); color: #b9c6dd; }
+@media (prefers-reduced-motion: reduce) {
+  .project-card { transition: none; }
+  .group:hover .project-card { transform: none; }
+}

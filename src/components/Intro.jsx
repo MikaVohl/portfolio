@@ -1,10 +1,37 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
+import { createGlitchGrid } from './heroGlitch';
+
+// Hero background effect. Remove an id from HERO_EFFECTS to gate it out of the site entirely.
+//   chroma — digits scramble with a red/blue split that converges as they settle (default)
+//   cross  — the original + grid that rotates and scales under the cursor
+//   pixel  — digits drop to a 3×5 bitmap and lock back into shape
+const HERO_EFFECTS = [
+  { id: 'chroma', label: 'Chromatic' },
+  { id: 'cross', label: 'Cross' },
+  { id: 'pixel', label: 'Bit-crushed' },
+];
+const DEFAULT_HERO_EFFECT = 'chroma';
+// Shows the small effect switcher in the hero (desktop only, like the grid itself).
+const SHOW_HERO_EFFECT_SWITCHER = true;
+const HERO_EFFECT_STORAGE_KEY = 'portfolio-hero-effect';
 
 const ROWS = 16;
 const COLS = 50;
 const COUNT = ROWS * COLS;
 const CELL = 30;
 const RADIUS = 110; // brushstroke radius in px
+
+function readHeroEffect() {
+  const available = (id) => HERO_EFFECTS.some((effect) => effect.id === id);
+  let stored = null;
+  try {
+    stored = SHOW_HERO_EFFECT_SWITCHER ? localStorage.getItem(HERO_EFFECT_STORAGE_KEY) : null;
+  } catch {
+    // Fall back to the default when storage is unavailable.
+  }
+  if (available(stored)) return stored;
+  return available(DEFAULT_HERO_EFFECT) ? DEFAULT_HERO_EFFECT : HERO_EFFECTS[0]?.id;
+}
 
 function CrossGrid({ sectionRef }) {
   const crossRefs = useRef([]);
@@ -90,8 +117,50 @@ function CrossGrid({ sectionRef }) {
   );
 }
 
+function GlitchGrid({ sectionRef, effect }) {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const canvas = canvasRef.current;
+    if (!section || !canvas) return;
+    return createGlitchGrid(canvas, section, effect);
+  }, [sectionRef, effect]);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="glitch-grid"
+      aria-hidden="true"
+      style={{ animation: 'fade-in 1s ease-out 0.3s both' }}
+    />
+  );
+}
+
+function HeroEffectSwitcher({ effect, onChange }) {
+  return (
+    <div className="hero-effects" role="group" aria-label="Background effect">
+      {HERO_EFFECTS.map(({ id, label }) => (
+        <button key={id} type="button" aria-pressed={effect === id} onClick={() => onChange(id)}>
+          {label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
 export default function Intro() {
   const sectionRef = useRef(null);
+  const [effect, setEffect] = useState(readHeroEffect);
+
+  const changeEffect = (id) => {
+    setEffect(id);
+    try {
+      localStorage.setItem(HERO_EFFECT_STORAGE_KEY, id);
+    } catch {
+      // Keep the switcher usable even when preferences cannot be saved.
+    }
+  };
 
   return (
     <section
@@ -99,7 +168,11 @@ export default function Intro() {
       id="intro"
       className="scroll-mt-32 py-4 text-center md:py-12 relative overflow-hidden"
     >
-      <CrossGrid sectionRef={sectionRef} />
+      {effect === 'cross' && <CrossGrid sectionRef={sectionRef} />}
+      {(effect === 'chroma' || effect === 'pixel') && <GlitchGrid sectionRef={sectionRef} effect={effect} />}
+      {SHOW_HERO_EFFECT_SWITCHER && HERO_EFFECTS.length > 1 && (
+        <HeroEffectSwitcher effect={effect} onChange={changeEffect} />
+      )}
       <div className="relative z-10 pointer-events-none flex w-full max-w-5xl flex-col items-center gap-6 text-center md:flex-row md:items-center md:justify-between md:gap-16 md:text-left">
         <div className="order-2 max-w-xl text-center md:order-1 md:text-left">
           <h2

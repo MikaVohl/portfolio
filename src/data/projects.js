@@ -5,6 +5,7 @@ const projects = [
     href: "https://github.com/MikaVohl/terraria-env",
     img: "/images/terrariaRL.png",
     mobileImg: "/images/terrariaRL_mobile.webp",
+    preview: "terraria",
     description:
       "Training Reinforcement Learning agents in a small Terraria-style environment written in C.",
   },
@@ -14,6 +15,7 @@ const projects = [
     href: "https://life.mikavohl.ca",
     img: "/images/game-of-life-CNN.png",
     mobileImg: "/images/game-of-life-CNN_mobile.webp",
+    preview: "life",
     description:
       "Trained a Convolutional Neural Network on Conway's Game of Life, a chaotic cellular automaton.",
   },
@@ -23,6 +25,7 @@ const projects = [
     href: "https://github.com/MikaVohl/Stitch",
     img: "/images/Stitch.png",
     mobileImg: "/images/Stitch_mobile.webp",
+    preview: "stitch",
     description:
       "Drag and drop components to design, train, and test neural networks on handwritten digit recognition. 1st place winner at McGill AI Society Hacks 25-26",
   },
