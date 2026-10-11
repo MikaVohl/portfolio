@@ -4,7 +4,7 @@ const ROWS = 16;
 const COLS = 50;
 const COUNT = ROWS * COLS;
 const CELL = 30;
-const RADIUS = 80; // brushstroke radius in px
+const RADIUS = 110; // brushstroke radius in px
 
 function CrossGrid({ sectionRef }) {
   const crossRefs = useRef([]);
@@ -14,6 +14,7 @@ function CrossGrid({ sectionRef }) {
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
+    const intensities = Array(COUNT).fill(0);
 
     const updateRect = () => { rectRef.current = section.getBoundingClientRect(); };
     updateRect();
@@ -37,9 +38,13 @@ function CrossGrid({ sectionRef }) {
           const dist = Math.sqrt((mx - cx) ** 2 + (my - cy) ** 2);
           const t = Math.max(0, 1 - dist / RADIUS);
 
-          el.style.transition = 'none';
+          // Activate immediately, then fade briefly as the cursor moves past.
+          el.style.transition = t > intensities[i]
+            ? 'none'
+            : 'transform 160ms ease-out, color 160ms ease-out';
+          intensities[i] = t;
           if (t > 0.01) {
-            el.style.transform = `rotate(${t * 45}deg) scale(${1 + t * 0.18})`;
+            el.style.transform = `rotate(${t * 60}deg) scale(${1 + t * 0.35})`;
             el.style.setProperty('--cross-intensity', `${t * 100}%`);
           } else {
             el.style.transform = '';
@@ -51,6 +56,7 @@ function CrossGrid({ sectionRef }) {
 
     const handleMouseLeave = () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      intensities.fill(0);
       const els = crossRefs.current;
       for (let i = 0; i < els.length; i++) {
         const el = els[i];
@@ -91,7 +97,7 @@ export default function Intro() {
     <section
       ref={sectionRef}
       id="intro"
-      className="scroll-mt-32 py-8 text-center md:py-20 relative overflow-hidden"
+      className="scroll-mt-32 py-4 text-center md:py-12 relative overflow-hidden"
     >
       <CrossGrid sectionRef={sectionRef} />
       <div className="relative z-10 pointer-events-none flex w-full max-w-5xl flex-col items-center gap-6 text-center md:flex-row md:items-center md:justify-between md:gap-16 md:text-left">

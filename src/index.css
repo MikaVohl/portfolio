@@ -18,7 +18,7 @@
     --control-hover: #f3f4f6;
     --link: #3b82f6;
     --cross: #9ca3af;
-    --cross-active: #374151;
+    --cross-active: #1f2937;
   }
 
   :root[data-theme='dark'] {
@@ -36,7 +36,7 @@
     --control-hover: #252b32;
     --link: #7db3ff;
     --cross: #48515c;
-    --cross-active: #a1a9b4;
+    --cross-active: #c7cdd6;
   }
 
   body {
@@ -132,8 +132,8 @@
     grid-template-rows: repeat(16, 30px);
     pointer-events: none;
     z-index: 0;
-    -webkit-mask-image: radial-gradient(ellipse 1200px 400px at 100% 0%, black 10%, transparent 70%);
-    mask-image: radial-gradient(ellipse 1200px 400px at 100% 0%, black 10%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse 1300px 450px at 100% 0%, black 10%, transparent 70%);
+    mask-image: radial-gradient(ellipse 1300px 450px at 100% 0%, black 10%, transparent 70%);
   }
   @media (min-width: 768px) {
     .cross-grid {
