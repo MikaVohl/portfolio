@@ -172,32 +172,6 @@
     transition: transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.4s ease;
   }
 
-  .hero-effects {
-    position: absolute;
-    right: 0;
-    bottom: 0.5rem;
-    z-index: 10;
-    display: none;
-    gap: 0.75rem;
-    font: 10px/1 ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-  @media (min-width: 768px) {
-    .hero-effects { display: flex; }
-  }
-  .hero-effects button {
-    padding: 0.25rem 0;
-    color: var(--text-muted);
-    opacity: 0.7;
-    transition: color 150ms ease, opacity 150ms ease;
-  }
-  .hero-effects button:hover { opacity: 1; }
-  .hero-effects button[aria-pressed='true'] {
-    color: var(--text);
-    opacity: 1;
-  }
-
   .nav-link {
     @apply uppercase tracking-[0.21em] px-[2vw] py-[1vh] relative inline-block;
     color: var(--text-muted);

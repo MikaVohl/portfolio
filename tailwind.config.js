@@ -4,6 +4,9 @@ export default {
   theme: {
     extend: {
       colors: { primary: '#000' },
+      fontFamily: {
+        sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Text"', '"SF Pro Display"', 'sans-serif'],
+      },
     },
   },
   plugins: [],
