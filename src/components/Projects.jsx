@@ -27,9 +27,9 @@ export default function Projects() {
               </div>
               <div className="pt-1">
                 <p className="text-secondary h-6 min-h-[1.5rem] font-medium">
-                  {p.href.includes("mikavohl.ca") ? "Try it at " : "View it on "}
+                  {p.href.includes("mikavohl.com") ? "Try it at " : "View it on "}
                   <span className="project-link hover:underline">
-                    {p.href.includes("mikavohl.ca") ? p.href.replace(/^https?:\/\//, "") : "Github"}
+                    {p.href.includes("mikavohl.com") ? p.href.replace(/^https?:\/\//, "") : "Github"}
                   </span>
                 </p>
               </div>

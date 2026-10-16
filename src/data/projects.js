@@ -12,7 +12,7 @@ const projects = [
   {
     title: "Neural Net Game of Life",
     stack: "Python / Pytorch / Typescript",
-    href: "https://life.mikavohl.ca",
+    href: "https://life.mikavohl.com",
     img: "/images/game-of-life-CNN.png",
     mobileImg: "/images/game-of-life-CNN_mobile.webp",
     preview: "life",
@@ -59,7 +59,7 @@ const projects = [
   {
     title: "Personal Knowledge Wiki",
     stack: "Javascript / React / PostgreSQL",
-    href: "https://wiki.mikavohl.ca",
+    href: "https://wiki.mikavohl.com",
     img: "/images/myWikiXS.png",
     mobileImg: "/images/myWikiXS_mobile.webp",
     description:
