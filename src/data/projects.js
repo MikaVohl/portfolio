@@ -59,7 +59,7 @@ const projects = [
   {
     title: "Personal Knowledge Wiki",
     stack: "Javascript / React / PostgreSQL",
-    href: "https://wiki.mikavohl.com",
+    href: "https://github.com/MikaVohl/myWiki",
     img: "/images/myWikiXS.png",
     mobileImg: "/images/myWikiXS_mobile.webp",
     description:
